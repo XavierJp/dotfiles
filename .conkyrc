@@ -102,6 +102,7 @@ ${color white}Ping (Internet): ${execi 10 ping -c 1 -W 2 8.8.8.8 2>/dev/null | g
 
 ${color grey}${stippled_hr 1}${color}
 ${color white}${font DejaVu Sans Mono:bold:size=12}» SYSTEM${font}${color}
+${color white}Bazzite: ${execi 3600 awk -F'"' '/^VERSION=/{print $2}' /etc/os-release}
 ${color white}Uptime: ${uptime}
 ${color white}Load: ${loadavg}
 ${color white}Kernel: ${kernel}

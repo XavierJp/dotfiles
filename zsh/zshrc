@@ -145,3 +145,7 @@ command -v fdfind &>/dev/null && alias fd='fdfind'
 . "$HOME/.local/share/../bin/env"
 
 . "$HOME/.bruin/env"
+
+# opencode 
+export PATH=/home/ganymede/.opencode/bin:$PATH
+
