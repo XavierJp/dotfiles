@@ -111,7 +111,7 @@ function exit_code() {
 }
 
 # Left prompt: [root] directory ➤
-PROMPT='${root_indicator}%F{$NCOLOR}%c ➤ %f'
+PROMPT='${root_indicator}%F{$NCOLOR}%c ❯ %f'
 
 # Right prompt: duration | git | python | node
 RPROMPT='$(cmd_duration)$(git_info)$(python_info)$(node_info)'

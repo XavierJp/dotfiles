@@ -1,68 +1,44 @@
-# dotfiles
+<h1 align="center">~/.dotfiles</h1>
 
-.files for an easy macOS or Linux config
+<p align="center">
+  <img src="https://img.shields.io/badge/macOS-000?logo=apple&logoColor=white" />
+  <img src="https://img.shields.io/badge/Linux-FCC624?logo=linux&logoColor=black" />
+  <img src="https://img.shields.io/badge/Zsh-121011?logo=gnu-bash&logoColor=white" />
+  <img src="https://img.shields.io/badge/Neovim-57A143?logo=neovim&logoColor=white" />
+</p>
 
-## Prerequisites
+<p align="center"><i>Personal dotfiles for macOS and Linux (distrobox).</i></p>
 
-- [Homebrew](https://brew.sh)
-- [Oh My Zsh](https://ohmyz.sh)
+---
 
-```bash
-# Install Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+### 📦 What's included
 
-# Install Oh My Zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
+| Config | Description |
+|--------|-------------|
+| `zsh/` | zshrc + custom Oh My Zsh theme |
+| `git/` | gitconfig |
+| `nvim/` | LazyVim configuration |
+| `ghostty/` | terminal config |
+| `iterm2/` | preferences plist |
+| `provision/` | platform bootstrap scripts (mac, distrobox) |
 
-## Installation
+---
 
-Clone the repo:
+### 🚀 Setup
 
 ```bash
 git clone git@github.com:parsio-ai/dotfiles.git ~/dotfiles
+cd ~/dotfiles
 ```
 
-### Zsh
+<table>
+<tr><td>🍎 <b>macOS</b></td><td><code>./provision/mac.sh</code></td></tr>
+<tr><td>📦 <b>Distrobox</b></td><td><code>./provision/distrobox.sh</code></td></tr>
+<tr><td>🔗 <b>Symlinks only</b></td><td><code>./setup.sh</code></td></tr>
+</table>
 
-```bash
-# Symlink zshrc
-ln -sf ~/dotfiles/zsh/zshrc ~/.zshrc
+---
 
-# Install custom theme
-ln -sf ~/dotfiles/zsh/arrow-custom.zsh-theme ~/.oh-my-zsh/custom/themes/arrow-custom.zsh-theme
+### 🔒 Local overrides
 
-# Install optional dependencies
-brew install autojump nvm
-
-# Reload shell
-source ~/.zshrc
-```
-
-### iTerm2
-
-```bash
-# Install iTerm2
-brew install --cask iterm2
-
-# Configure iTerm2 to use dotfiles preferences
-defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/dotfiles/iterm2"
-defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
-```
-
-Then restart iTerm2.
-
-## Structure
-
-```
-dotfiles/
-├── iterm2/
-│   └── com.googlecode.iterm2.plist  # iTerm2 preferences (colors, profiles, etc.)
-└── zsh/
-    ├── zshrc                        # Zsh configuration
-    └── arrow-custom.zsh-theme       # Custom Oh My Zsh theme
-```
-
-## Local overrides
-
-For machine-specific secrets or settings, create `~/.zshrc.local` (not tracked in git).
+Machine-specific settings go in `~/.zshrc.local` (not tracked).
