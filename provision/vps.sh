@@ -132,6 +132,20 @@ install_lazygit() {
     log "lazygit installed"
 }
 
+install_gh() {
+    if command -v gh &>/dev/null; then log "gh already installed"; return; fi
+    info "Installing gh..."
+    sudo mkdir -p -m 755 /etc/apt/keyrings
+    wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+        | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg >/dev/null
+    sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+        | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
+    sudo apt-get update
+    sudo apt-get install -y gh
+    log "gh installed"
+}
+
 install_neovim() {
     if command -v nvim &>/dev/null; then log "Neovim already installed"; return; fi
     info "Installing Neovim..."
@@ -147,6 +161,7 @@ install_cli_tools() {
     install_eza
     install_zoxide
     install_lazygit
+    install_gh
     install_neovim
 }
 

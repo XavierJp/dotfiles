@@ -50,6 +50,7 @@ setup_common_symlinks() {
         mv "$HOME/.claude/settings.json" "$HOME/.claude/settings.json.bak"
     fi
     ln -sf "$DOTFILES_DIR/claude-code/settings.json" "$HOME/.claude/settings.json"
+    ln -sf "$DOTFILES_DIR/claude-code/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
     log "Claude Code settings linked"
 
     # Neovim config
