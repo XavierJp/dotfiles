@@ -31,6 +31,10 @@ setup_common_symlinks() {
     ln -sf "$DOTFILES_DIR/git/gitconfig" "$HOME/.gitconfig"
     log "gitconfig linked"
 
+    # tmux
+    ln -sf "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
+    log "tmux config linked"
+
     # OMZ custom theme
     local ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
     if [ -d "$ZSH_CUSTOM" ]; then
@@ -40,11 +44,14 @@ setup_common_symlinks() {
     fi
 
     # Claude Code settings
-    if [ -f "$DOTFILES_DIR/claude-code/settings.json" ]; then
-        mkdir -p "$HOME/.claude"
-        ln -sf "$DOTFILES_DIR/claude-code/settings.json" "$HOME/.claude/settings.json"
-        log "Claude Code settings linked"
+    mkdir -p "$HOME/.claude"
+    if [ -f "$HOME/.claude/settings.json" ] && [ ! -L "$HOME/.claude/settings.json" ]; then
+        info "Backing up existing Claude Code settings..."
+        mv "$HOME/.claude/settings.json" "$HOME/.claude/settings.json.bak"
     fi
+    ln -sf "$DOTFILES_DIR/claude-code/settings.json" "$HOME/.claude/settings.json"
+    ln -sf "$DOTFILES_DIR/claude-code/statusline-command.sh" "$HOME/.claude/statusline-command.sh"
+    log "Claude Code settings linked"
 
     # Neovim config
     mkdir -p "$HOME/.config"

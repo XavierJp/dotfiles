@@ -24,7 +24,7 @@ warn() { echo -e "${YELLOW}[!]${NC} $*"; }
 err()  { echo -e "${RED}[✗]${NC} $*"; }
 
 # ──────────────────────────────────────────────────────────────────────────────
-# 1. Symlink host-side configs (Ghostty)
+# 1. Symlink host-side configs (Ghostty, conky)
 # ──────────────────────────────────────────────────────────────────────────────
 setup_host_symlinks() {
     info "Setting up host-side symlinks..."
@@ -33,6 +33,10 @@ setup_host_symlinks() {
     mkdir -p ~/.config/ghostty
     ln -sf "$DOTFILES_DIR/ghostty/config" ~/.config/ghostty/config
     log "Ghostty config linked"
+
+    # Conky (host-side system monitor)
+    ln -sf "$DOTFILES_DIR/.conkyrc" ~/.conkyrc
+    log "Conky config linked"
 }
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -115,14 +119,17 @@ if ! command -v lazygit &>/dev/null; then
     rm -f lazygit lazygit.tar.gz
 fi
 
-# ── yazi ──────────────────────────────────────────────────────────────────
-echo ">>> Installing yazi..."
-if ! command -v yazi &>/dev/null; then
-    YAZI_VERSION=$(curl -s "https://api.github.com/repos/sxyazi/yazi/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-    curl -Lo yazi.zip "https://github.com/sxyazi/yazi/releases/latest/download/yazi-x86_64-unknown-linux-gnu.zip"
-    unzip -o yazi.zip
-    sudo install yazi-x86_64-unknown-linux-gnu/yazi /usr/local/bin
-    rm -rf yazi.zip yazi-x86_64-unknown-linux-gnu
+# ── gh (GitHub CLI) ───────────────────────────────────────────────────────
+echo ">>> Installing gh..."
+if ! command -v gh &>/dev/null; then
+    sudo mkdir -p -m 755 /etc/apt/keyrings
+    wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+        | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg >/dev/null
+    sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+        | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
+    sudo apt update
+    sudo apt install -y gh
 fi
 
 # ── lazydocker ────────────────────────────────────────────────────────────
@@ -219,15 +226,6 @@ fi
 echo ">>> Installing Bruin CLI..."
 if ! command -v bruin &>/dev/null; then
     curl -LsSf https://getbruin.com/install/cli | sh
-fi
-
-# ── zellij ────────────────────────────────────────────────────────────
-echo ">>> Installing zellij..."
-if ! command -v zellij &>/dev/null; then
-    curl -Lo zellij.tar.gz "https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz"
-    tar xf zellij.tar.gz
-    sudo install zellij /usr/local/bin
-    rm -f zellij zellij.tar.gz
 fi
 
 # ── spotify_player (Spotify TUI) ─────────────────────────────────────

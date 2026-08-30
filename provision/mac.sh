@@ -69,8 +69,6 @@ install_brew_packages() {
         eza
         zoxide
         tmux
-        zellij
-        yazi
         lazygit
         lazydocker
         rtk
