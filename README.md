@@ -17,10 +17,13 @@
 |--------|-------------|
 | `zsh/` | zshrc + custom Oh My Zsh theme |
 | `git/` | gitconfig |
-| `nvim/` | LazyVim configuration |
+| `nvim/` | Neovim config (lazy.nvim) |
 | `ghostty/` | terminal config |
-| `iterm2/` | preferences plist |
-| `provision/` | platform bootstrap scripts (mac, distrobox) |
+| `tmux/` | tmux.conf |
+| `iterm2/` | preferences plist (macOS) |
+| `.conkyrc` | system monitor, Bazzite host (Linux) |
+| `claude-code/` | Claude Code settings |
+| `provision/` | platform bootstrap scripts (mac, distrobox, vps) |
 
 ---
 
@@ -34,6 +37,7 @@ cd ~/dotfiles
 <table>
 <tr><td>🍎 <b>macOS</b></td><td><code>./provision/mac.sh</code></td></tr>
 <tr><td>📦 <b>Distrobox</b></td><td><code>./provision/distrobox.sh</code></td></tr>
+<tr><td>☁️ <b>VPS</b> (headless Ubuntu/Debian)</td><td><code>./provision/vps.sh</code></td></tr>
 <tr><td>🔗 <b>Symlinks only</b></td><td><code>./setup.sh</code></td></tr>
 </table>
 

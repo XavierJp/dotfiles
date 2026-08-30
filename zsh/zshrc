@@ -138,23 +138,25 @@ fi
 # ── fd (binary is "fdfind" on Ubuntu) ────────────────────────────────────
 command -v fdfind &>/dev/null && alias fd='fdfind'
 
-# ── Load local secrets (not in version control) ──────────────────────────
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-
-
+# ── uv ────────────────────────────────────────────────────────────────────
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
 
-. "$HOME/.bruin/env"
+# ── Bruin CLI ─────────────────────────────────────────────────────────────
+[[ -f "$HOME/.bruin/env" ]] && . "$HOME/.bruin/env"
 
-# opencode 
-export PATH=/home/ganymede/.opencode/bin:$PATH
+# ── opencode ──────────────────────────────────────────────────────────────
+[[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"
 
-# brew
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+# ── LM Studio CLI (macOS) ────────────────────────────────────────────────
+[[ -d "$HOME/.lmstudio/bin" ]] && export PATH="$PATH:$HOME/.lmstudio/bin"
 
-# unalias gsd
+# ── Homebrew libpq (macOS) ───────────────────────────────────────────────
+[[ -d "/opt/homebrew/opt/libpq/bin" ]] && export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# ── Drop OMZ's gsd alias ─────────────────────────────────────────────────
 unalias gsd 2>/dev/null
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/ganymede/.lmstudio/bin"
+# ── Local overrides / secrets (not in version control) ───────────────────
+# Kept last so machine-specific settings win over everything above.
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 

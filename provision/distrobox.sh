@@ -24,7 +24,7 @@ warn() { echo -e "${YELLOW}[!]${NC} $*"; }
 err()  { echo -e "${RED}[✗]${NC} $*"; }
 
 # ──────────────────────────────────────────────────────────────────────────────
-# 1. Symlink host-side configs (Ghostty)
+# 1. Symlink host-side configs (Ghostty, conky)
 # ──────────────────────────────────────────────────────────────────────────────
 setup_host_symlinks() {
     info "Setting up host-side symlinks..."
@@ -33,6 +33,10 @@ setup_host_symlinks() {
     mkdir -p ~/.config/ghostty
     ln -sf "$DOTFILES_DIR/ghostty/config" ~/.config/ghostty/config
     log "Ghostty config linked"
+
+    # Conky (host-side system monitor)
+    ln -sf "$DOTFILES_DIR/.conkyrc" ~/.conkyrc
+    log "Conky config linked"
 }
 
 # ──────────────────────────────────────────────────────────────────────────────
