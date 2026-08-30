@@ -132,28 +132,6 @@ install_lazygit() {
     log "lazygit installed"
 }
 
-install_yazi() {
-    if command -v yazi &>/dev/null; then log "yazi already installed"; return; fi
-    info "Installing yazi..."
-    curl -Lo yazi.zip \
-        "https://github.com/sxyazi/yazi/releases/latest/download/yazi-x86_64-unknown-linux-gnu.zip"
-    unzip -o yazi.zip
-    sudo install yazi-x86_64-unknown-linux-gnu/yazi /usr/local/bin
-    rm -rf yazi.zip yazi-x86_64-unknown-linux-gnu
-    log "yazi installed"
-}
-
-install_zellij() {
-    if command -v zellij &>/dev/null; then log "zellij already installed"; return; fi
-    info "Installing zellij..."
-    curl -Lo zellij.tar.gz \
-        "https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz"
-    tar xf zellij.tar.gz
-    sudo install zellij /usr/local/bin
-    rm -f zellij zellij.tar.gz
-    log "zellij installed"
-}
-
 install_neovim() {
     if command -v nvim &>/dev/null; then log "Neovim already installed"; return; fi
     info "Installing Neovim..."
@@ -169,8 +147,6 @@ install_cli_tools() {
     install_eza
     install_zoxide
     install_lazygit
-    install_yazi
-    install_zellij
     install_neovim
 }
 

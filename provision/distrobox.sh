@@ -119,16 +119,6 @@ if ! command -v lazygit &>/dev/null; then
     rm -f lazygit lazygit.tar.gz
 fi
 
-# ── yazi ──────────────────────────────────────────────────────────────────
-echo ">>> Installing yazi..."
-if ! command -v yazi &>/dev/null; then
-    YAZI_VERSION=$(curl -s "https://api.github.com/repos/sxyazi/yazi/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-    curl -Lo yazi.zip "https://github.com/sxyazi/yazi/releases/latest/download/yazi-x86_64-unknown-linux-gnu.zip"
-    unzip -o yazi.zip
-    sudo install yazi-x86_64-unknown-linux-gnu/yazi /usr/local/bin
-    rm -rf yazi.zip yazi-x86_64-unknown-linux-gnu
-fi
-
 # ── lazydocker ────────────────────────────────────────────────────────────
 echo ">>> Installing lazydocker..."
 if ! command -v lazydocker &>/dev/null; then
@@ -223,15 +213,6 @@ fi
 echo ">>> Installing Bruin CLI..."
 if ! command -v bruin &>/dev/null; then
     curl -LsSf https://getbruin.com/install/cli | sh
-fi
-
-# ── zellij ────────────────────────────────────────────────────────────
-echo ">>> Installing zellij..."
-if ! command -v zellij &>/dev/null; then
-    curl -Lo zellij.tar.gz "https://github.com/zellij-org/zellij/releases/latest/download/zellij-x86_64-unknown-linux-musl.tar.gz"
-    tar xf zellij.tar.gz
-    sudo install zellij /usr/local/bin
-    rm -f zellij zellij.tar.gz
 fi
 
 # ── spotify_player (Spotify TUI) ─────────────────────────────────────
